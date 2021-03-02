@@ -210,7 +210,7 @@ public class Urls {
 
     public static String realmIssuer(URI baseUri, String realmName) {
         if (System.getenv().containsKey("KEYCLOAK_ISSUER")) {
-            return System.getenv().get("KEYCLOAK_ISSUER");
+            return UriBuilder.fromUri(System.getenv().get("KEYCLOAK_ISSUER")).path("{realm}").build(realmName).toString();
         }
         return realmBase(baseUri).path("{realm}").build(realmName).toString();
     }
